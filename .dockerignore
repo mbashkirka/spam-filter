@@ -1,0 +1,11 @@
+.venv
+.git
+.github
+__pycache__
+.pytest_cache
+.ruff_cache
+*.pyc
+data/raw
+data/processed
+artifacts/m5_transformer
+reports/m6_external_predictions.csv

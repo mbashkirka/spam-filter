@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spam-filter-lab"
+version = "1.0.0"
+description = "Production-oriented NLP spam detection pet project: from Naive Bayes to transformer serving."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = {text = "MIT"}
+authors = [{name = "Pet Project"}]
+dependencies = [
+  "numpy>=1.26,<3",
+  "pandas>=2.2,<3",
+  "scikit-learn>=1.5,<2",
+  "nltk>=3.9,<4",
+  "joblib>=1.4,<2",
+  "certifi>=2024.8.30,<2027",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3,<9",
+  "ruff>=0.9,<1",
+  "httpx2>=2.9,<3",
+]
+data = [
+  "ucimlrepo>=0.0.7,<1",
+]
+transformer = [
+  "torch>=2.4,<3",
+  "transformers>=4.45,<6",
+  "safetensors>=0.4,<1",
+]
+serving = [
+  "fastapi>=0.115,<1",
+  "uvicorn>=0.30,<1",
+]
+
+[project.scripts]
+spam-filter = "spam_filter.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+filterwarnings = [
+  "ignore:Setting the shape on a NumPy array has been deprecated.*:DeprecationWarning:joblib.numpy_pickle",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
